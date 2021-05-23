@@ -1,0 +1,15 @@
+[package]
+name = "minecraft_image"
+version = "0.1.0"
+authors = ["RebelAndroid <christophermcd0903@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+delta_e = "0.2"
+lab = "0.7.2"
+rand = "0.8.2"
+png = "0.16.8"
+clap = "3.0.0-beta.2"
+csv = "1.1"
