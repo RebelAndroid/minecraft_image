@@ -1,2 +1,6 @@
 /target
 minecraft_image.code-workspace
+output.png
+instructions.txt
+materials.txt
+*.png

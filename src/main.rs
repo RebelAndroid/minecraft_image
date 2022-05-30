@@ -85,7 +85,7 @@ fn main() {
     reader.next_frame(&mut buf).expect("unable to read frame");
 
     let bytes_per_pixel = reader.info().bytes_per_pixel();
-
+    println!("bytes per pixel: {}", bytes_per_pixel);
 
     let mut color_indicies :Vec<usize> = vec![];
 
@@ -94,7 +94,7 @@ fn main() {
             
             let index: usize = (y * reader.info().width + x) as usize;
             // skip transparent pixels
-            if buf[bytes_per_pixel * index + 3] == 0{
+            if bytes_per_pixel == 4 && buf[bytes_per_pixel * index + 3] == 0{
                 continue;
             }
             let old_pixel = [buf[bytes_per_pixel * index], buf[bytes_per_pixel * index + 1], buf[bytes_per_pixel * index + 2]];
@@ -159,9 +159,10 @@ fn main() {
         for y in (0..reader.info().height){
             let mut color_name = &color_names[color_indicies[(y * reader.info().width + x) as usize]];
             if options.staircase{
-                materials_list[color_indicies[(x * reader.info().width + y) as usize] / 3] += 1;
+                materials_list[color_indicies[(y * reader.info().width + x) as usize] / 3] += 1;
             }else{
-                materials_list[color_indicies[(x * reader.info().width + y) as usize]] += 1;
+                //println!("x: {}, y: {}", x, y);
+                materials_list[color_indicies[(y * reader.info().width + x) as usize]] += 1;
             }
             instructions_file.write_all(format!("{}\n", color_name).as_bytes());
         }
